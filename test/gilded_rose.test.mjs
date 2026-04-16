@@ -3,6 +3,11 @@ import { expect } from "chai";
 import { Item, Shop } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
+  test("empty shop can be created", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.items).to.deep.equal([]);
+  });
+
   test("new shop can be created with item foo", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     const items = gildedRose.updateQuality();
@@ -13,6 +18,13 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("foo", 0, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(8);
+    expect(items[0].sellIn).to.equal(-1);
+  });
+
+  test("normal item with quality 0 stays at 0", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
     expect(items[0].sellIn).to.equal(-1);
   });
 
@@ -93,7 +105,7 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(19);
   });
 
-  test("sulfuras, hand of ragnaros", () => {
+  test("sulfuras, hand of ragnaros is unchanged", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 3, 3)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(3);
