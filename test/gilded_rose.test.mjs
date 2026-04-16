@@ -50,10 +50,17 @@ describe("Gilded Rose", () => {
   });
 
   test("backstage passes with sellIn exactly 11", () => {
-    const item = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10);
-    const shop = new Shop([item]);
-    shop.updateQuality();
-    expect(item.quality).to.equal(11);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(11);
+    expect(items[0].sellIn).to.equal(10);
+  });
+
+  test("backstage pass with sellIn exactly 6", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(12);
+    expect(items[0].sellIn).to.equal(5);
   });
 
   test("backstage passes with sellIn 10 and quality 49", () => {
@@ -91,6 +98,13 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(19);
   });
 
+  test("backstage passes with sellIn 0 result in unchanged quality", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+    expect(items[0].sellIn).to.equal(-1);
+  });
+
   test("aged brie with sellIn 3 and quality 3 is updated", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 3, 3)]);
     const items = gildedRose.updateQuality();
@@ -105,10 +119,38 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(19);
   });
 
+  test("aged brie with sellIn 0 increases quality twice", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(2);
+    expect(items[0].sellIn).to.equal(-1);
+  });
+
   test("sulfuras, hand of ragnaros is unchanged", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 3, 3)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(3);
     expect(items[0].sellIn).to.equal(3);
+  });
+
+  test("sulfuras, hand of ragnaros is unchanged with 0 sellIn", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+    expect(items[0].sellIn).to.equal(0);
+  });
+
+  test("sulfuras, hand of ragnaros is unchanged with negative sellIn and positive quality", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 1)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(1);
+    expect(items[0].sellIn).to.equal(-1);
+  });
+
+  test("aged brie with 50 quality and 0 sellIn stays 50 quality but degrades to -1 sellIn", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(50);
+    expect(items[0].sellIn).to.equal(-1);
   });
 });
