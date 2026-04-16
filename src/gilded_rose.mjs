@@ -23,16 +23,20 @@ export class Shop {
     return item.name === "Sulfuras, Hand of Ragnaros";
   }
 
+  decreaseQuality(normalItem) {
+    if (normalItem.quality > 0) {
+      if (!this.isSulfuras(normalItem)) {
+        normalItem.quality -= 1;
+      }
+    }
+  }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
       if (!this.isAgedBrie(item) && !this.isBackstagePass(item)) {
-        if (item.quality > 0) {
-          if (!this.isSulfuras(item)) {
-            item.quality -= 1;
-          }
-        }
+        this.decreaseQuality(item);
       } else {
         if (item.quality < 50) {
           item.quality += 1;
