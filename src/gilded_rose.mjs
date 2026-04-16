@@ -35,6 +35,10 @@ export class Shop {
     item.quality += 1;
   }
 
+  decreaseSellIn(item) {
+    item.sellIn -= 1;
+  }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
@@ -58,9 +62,11 @@ export class Shop {
           }
         }
       }
+
       if (!this.isSulfuras(item)) {
-        item.sellIn -= 1;
+        this.decreaseSellIn(item);
       }
+
       if (item.sellIn < 0) {
         if (!this.isAgedBrie(item)) {
           if (!this.isBackstagePass(item)) {
