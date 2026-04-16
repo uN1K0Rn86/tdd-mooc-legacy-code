@@ -25,9 +25,7 @@ export class Shop {
 
   decreaseQuality(item) {
     if (item.quality > 0) {
-      if (!this.isSulfuras(item)) {
-        item.quality -= 1;
-      }
+      item.quality -= 1;
     }
   }
 
@@ -46,6 +44,8 @@ export class Shop {
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
+
+      if (this.isSulfuras(item)) return this.items;
 
       if (!this.isAgedBrie(item) && !this.isBackstagePass(item)) {
         this.decreaseQuality(item);
@@ -67,17 +67,13 @@ export class Shop {
         }
       }
 
-      if (!this.isSulfuras(item)) {
-        this.decreaseSellIn(item);
-      }
+      this.decreaseSellIn(item);
 
       if (item.sellIn < 0) {
         if (!this.isAgedBrie(item)) {
           if (!this.isBackstagePass(item)) {
             if (item.quality > 0) {
-              if (!this.isSulfuras(item)) {
-                this.decreaseQuality(item);
-              }
+              this.decreaseQuality(item);
             }
           } else {
             this.spoil(item);
