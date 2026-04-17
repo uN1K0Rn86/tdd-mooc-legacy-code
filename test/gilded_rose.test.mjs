@@ -141,14 +141,14 @@ describe("Gilded Rose", () => {
   });
 
   test("sulfuras, hand of ragnaros is unchanged with negative sellIn and positive quality", () => {
-    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 1)]);
+    const gildedRose = new Shop([new Sulfuras("Sulfuras, Hand of Ragnaros", -1, 1)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(1);
     expect(items[0].sellIn).to.equal(-1);
   });
 
   test("aged brie with 50 quality and 0 sellIn stays 50 quality but degrades to -1 sellIn", () => {
-    const gildedRose = new Shop([new Item("Aged Brie", 0, 50)]);
+    const gildedRose = new Shop([new AgedBrie("Aged Brie", 0, 50)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(50);
     expect(items[0].sellIn).to.equal(-1);
