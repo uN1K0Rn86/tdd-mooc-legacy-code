@@ -4,6 +4,12 @@ export class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
+  decreaseQuality() {
+    if (this.quality > 0) {
+      this.quality -= 1;
+    }
+  }
 }
 
 export class Shop {
@@ -21,12 +27,6 @@ export class Shop {
 
   isSulfuras(item) {
     return item.name === "Sulfuras, Hand of Ragnaros";
-  }
-
-  decreaseQuality(item) {
-    if (item.quality > 0) {
-      item.quality -= 1;
-    }
   }
 
   increaseQuality(item) {
@@ -48,7 +48,7 @@ export class Shop {
       if (this.isSulfuras(item)) return this.items;
 
       if (!this.isAgedBrie(item) && !this.isBackstagePass(item)) {
-        this.decreaseQuality(item);
+        item.decreaseQuality();
       } else {
         if (item.quality < 50) {
           this.increaseQuality(item);
@@ -72,7 +72,7 @@ export class Shop {
       if (item.sellIn < 0) {
         if (!this.isAgedBrie(item)) {
           if (!this.isBackstagePass(item)) {
-            this.decreaseQuality(item);
+            item.decreaseQuality();
           } else {
             this.spoil(item);
           }
