@@ -72,9 +72,7 @@ export class Shop {
       if (item.sellIn < 0) {
         if (!this.isAgedBrie(item)) {
           if (!this.isBackstagePass(item)) {
-            if (item.quality > 0) {
-              this.decreaseQuality(item);
-            }
+            this.decreaseQuality(item);
           } else {
             this.spoil(item);
           }
