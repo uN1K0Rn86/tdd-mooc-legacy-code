@@ -16,6 +16,10 @@ export class Item {
       this.quality += 1;
     }
   }
+
+  spoil() {
+    this.quality = 0;
+  }
 }
 
 export class Shop {
@@ -37,10 +41,6 @@ export class Shop {
 
   decreaseSellIn(item) {
     item.sellIn -= 1;
-  }
-
-  spoil(item) {
-    item.quality = 0;
   }
 
   updateQuality() {
@@ -70,7 +70,7 @@ export class Shop {
           if (!this.isBackstagePass(item)) {
             item.decreaseQuality();
           } else {
-            this.spoil(item);
+            item.spoil();
           }
         } else {
           item.increaseQuality();
