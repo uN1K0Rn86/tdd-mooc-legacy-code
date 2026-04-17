@@ -17,6 +17,10 @@ export class Item {
     }
   }
 
+  decreaseSellIn() {
+    this.sellIn -= 1;
+  }
+
   spoil() {
     this.quality = 0;
   }
@@ -39,10 +43,6 @@ export class Shop {
     return item.name === "Sulfuras, Hand of Ragnaros";
   }
 
-  decreaseSellIn(item) {
-    item.sellIn -= 1;
-  }
-
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
@@ -63,7 +63,7 @@ export class Shop {
         }
       }
 
-      this.decreaseSellIn(item);
+      item.decreaseSellIn();
 
       if (item.sellIn < 0) {
         if (!this.isAgedBrie(item)) {
