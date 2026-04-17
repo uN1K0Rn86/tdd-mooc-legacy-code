@@ -49,18 +49,6 @@ export class Shop {
     this.items = items;
   }
 
-  isAgedBrie(item) {
-    return item.name === "Aged Brie";
-  }
-
-  isBackstagePass(item) {
-    return item.name === "Backstage passes to a TAFKAL80ETC concert";
-  }
-
-  isSulfuras(item) {
-    return item.name === "Sulfuras, Hand of Ragnaros";
-  }
-
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
