@@ -40,7 +40,7 @@ export class NormalItem extends Item {
 
 export class Sulfuras extends Item {
   constructor(name, sellIn = 0, quality = 80) {
-    super("Sulfuras, Hand of Ragnaros", sellIn, quality);
+    super("Sulfuras, Hand of Ragnaros", sellIn, 80);
   }
 }
 
