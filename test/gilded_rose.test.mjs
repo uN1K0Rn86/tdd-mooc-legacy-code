@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { AgedBrie, BackstagePass, Item, NormalItem, Shop, Sulfuras } from "../src/gilded_rose.mjs";
+import { AgedBrie, BackstagePass, ConjuredItem, Item, NormalItem, Shop, Sulfuras } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("empty shop can be created", () => {
@@ -152,5 +152,12 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(50);
     expect(items[0].sellIn).to.equal(-1);
+  });
+
+  test("conjured item with 2 quality should degrade to 0", () => {
+    const gildedRose = new Shop([new ConjuredItem("Conjured Item", 1, 2)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.be.equal(0);
+    expect(items[0].sellIn).to.be.equal(0);
   });
 });

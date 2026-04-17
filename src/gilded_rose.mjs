@@ -44,6 +44,14 @@ export class Sulfuras extends Item {
   }
 }
 
+export class ConjuredItem extends Item {
+  updateQuality() {
+    if (this.quality > 0) this.quality -= 2;
+    this.decreaseSellIn();
+    if (this.sellIn < 0 && this.quality > 0) this.quality -= 2;
+  }
+}
+
 export class Shop {
   constructor(items = []) {
     this.items = items;
