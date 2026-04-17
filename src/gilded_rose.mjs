@@ -26,6 +26,36 @@ export class Item {
   }
 }
 
+export class AgedBrie extends Item {
+  updateQuality() {
+    if (this.quality < 50) this.quality += 1;
+    this.decreaseSellIn();
+    if (this.sellIn < 0) this.quality += 1;
+  }
+}
+
+export class BackstagePass extends Item {
+  updateQuality() {
+    if (this.quality < 50) this.quality += 1;
+    if (this.sellIn < 11) this.quality += 1;
+    if (this.sellIn < 6) this.quality += 1;
+    this.decreaseSellIn();
+    if (this.sellIn < 0) this.spoil();
+  }
+}
+
+export class NormalItem extends Item {
+  updateQuality() {
+    if (this.quality > 0) this.quality -= 1;
+    this.decreaseSellIn();
+    if (this.sellIn < 0 && this.quality > 0) this.quality -= 1;
+  }
+}
+
+export class Sulfuras extends Item {
+  updateQuality() {}
+}
+
 export class Shop {
   constructor(items = []) {
     this.items = items;
