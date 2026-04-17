@@ -10,6 +10,12 @@ export class Item {
       this.quality -= 1;
     }
   }
+
+  increaseQuality() {
+    if (this.quality < 50) {
+      this.quality += 1;
+    }
+  }
 }
 
 export class Shop {
@@ -29,10 +35,6 @@ export class Shop {
     return item.name === "Sulfuras, Hand of Ragnaros";
   }
 
-  increaseQuality(item) {
-    item.quality += 1;
-  }
-
   decreaseSellIn(item) {
     item.sellIn -= 1;
   }
@@ -50,19 +52,13 @@ export class Shop {
       if (!this.isAgedBrie(item) && !this.isBackstagePass(item)) {
         item.decreaseQuality();
       } else {
-        if (item.quality < 50) {
-          this.increaseQuality(item);
-          if (this.isBackstagePass(item)) {
-            if (item.sellIn < 11) {
-              if (item.quality < 50) {
-                this.increaseQuality(item);
-              }
-            }
-            if (item.sellIn < 6) {
-              if (item.quality < 50) {
-                this.increaseQuality(item);
-              }
-            }
+        item.increaseQuality();
+        if (this.isBackstagePass(item)) {
+          if (item.sellIn < 11) {
+            item.increaseQuality();
+          }
+          if (item.sellIn < 6) {
+            item.increaseQuality();
           }
         }
       }
@@ -77,9 +73,7 @@ export class Shop {
             this.spoil(item);
           }
         } else {
-          if (item.quality < 50) {
-            this.increaseQuality(item);
-          }
+          item.increaseQuality();
         }
       }
     }
