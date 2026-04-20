@@ -24,6 +24,9 @@ export class AgedBrie extends Item {
 }
 
 export class BackstagePass extends Item {
+  constructor(sellIn, quality) {
+    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+  }
   updateQuality() {
     if (this.quality < 50) this.quality += 1;
     if (this.sellIn < 11 && this.quality < 50) this.quality += 1;

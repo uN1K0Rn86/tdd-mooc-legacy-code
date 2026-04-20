@@ -81,35 +81,35 @@ describe("Gilded Rose", () => {
 
   describe("backstage passes", () => {
     test("with sellIn 1 and quality 0 increase quality by 3", () => {
-      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 1, 0)]);
+      const shop = new Shop([new BackstagePass(1, 0)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(3);
       expect(items[0].sellIn).to.equal(0);
     });
 
     test("with sellIn 11 and quality 10 increase quality by 1", () => {
-      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
+      const shop = new Shop([new BackstagePass(11, 10)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(11);
       expect(items[0].sellIn).to.equal(10);
     });
 
     test("with sellIn 6 and quality 10 increase quality by 2", () => {
-      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 6, 10)]);
+      const shop = new Shop([new BackstagePass(6, 10)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(12);
       expect(items[0].sellIn).to.equal(5);
     });
 
     test("with quality 50 do not get increased quality", () => {
-      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 5, 50)]);
+      const shop = new Shop([new BackstagePass(5, 50)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(50);
       expect(items[0].sellIn).to.equal(4);
     });
 
     test("backstage passes with sellIn 0 result in unchanged quality", () => {
-      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 0, 0)]);
+      const shop = new Shop([new BackstagePass(0, 0)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(0);
       expect(items[0].sellIn).to.equal(-1);
