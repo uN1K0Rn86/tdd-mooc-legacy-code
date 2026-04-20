@@ -37,7 +37,7 @@ describe("Gilded Rose", () => {
     });
   });
 
-  describe("aged brie", () => {
+  describe("Aged Brie", () => {
     test("has correct name when created", () => {
       const shop = new Shop([new AgedBrie(10, 10)]);
       expect(shop.items[0].name).to.equal("Aged Brie");
@@ -79,7 +79,7 @@ describe("Gilded Rose", () => {
     });
   });
 
-  describe("backstage passes", () => {
+  describe("Backstage passes", () => {
     test("have correct name when created", () => {
       const backstagePass = new BackstagePass(10, 10);
       expect(backstagePass.name).to.equal("Backstage passes to a TAFKAL80ETC concert");
@@ -122,6 +122,11 @@ describe("Gilded Rose", () => {
   });
 
   describe("Sulfuras, Hand of Ragnaros", () => {
+    test("gets correct name when created", () => {
+      const sulfuras = new Sulfuras();
+      expect(sulfuras.name).to.equal("Sulfuras, Hand of Ragnaros");
+    });
+
     test("sellIn is 0 and quality is 80", () => {
       const shop = new Shop([new Sulfuras()]);
       const items = shop.updateQuality();
@@ -130,10 +135,12 @@ describe("Gilded Rose", () => {
     });
   });
 
-  test("conjured item with 2 quality should degrade to 0", () => {
-    const shop = new Shop([new ConjuredItem("Conjured Item", 1, 2)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.be.equal(0);
-    expect(items[0].sellIn).to.be.equal(0);
+  describe("Conjured Item", () => {
+    test("with 2 quality should degrade to 0", () => {
+      const shop = new Shop([new ConjuredItem("Conjured Item", 1, 2)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.be.equal(0);
+      expect(items[0].sellIn).to.be.equal(0);
+    });
   });
 });
