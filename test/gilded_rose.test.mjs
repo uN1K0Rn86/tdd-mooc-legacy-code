@@ -153,5 +153,17 @@ describe("Gilded Rose", () => {
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(0);
     });
+
+    test("with 0 sellIn should degrade by 4", () => {
+      const shop = new Shop([new ConjuredItem(0, 4)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(0);
+    });
+
+    test("with 1 sellIn should degrade by 2", () => {
+      const shop = new Shop([new ConjuredItem(1, 10)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(8);
+    });
   });
 });
