@@ -50,7 +50,7 @@ describe("Gilded Rose", () => {
       expect(items[0].sellIn).to.equal(2);
     });
 
-    test("with sellIn 20", () => {
+    test("with sellIn 20 and quality 3 updates to sellIn 19 and quality 4", () => {
       const shop = new Shop([new AgedBrie(20, 3)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(4);
