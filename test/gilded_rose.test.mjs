@@ -137,7 +137,7 @@ describe("Gilded Rose", () => {
 
   describe("Conjured Item", () => {
     test("with 2 quality should degrade to 0", () => {
-      const shop = new Shop([new ConjuredItem("Conjured Item", 1, 2)]);
+      const shop = new Shop([new ConjuredItem(1, 2)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.be.equal(0);
       expect(items[0].sellIn).to.be.equal(0);

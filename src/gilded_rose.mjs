@@ -51,6 +51,9 @@ export class Sulfuras extends Item {
 }
 
 export class ConjuredItem extends Item {
+  constructor(sellIn, quality) {
+    super("Conjured Item", sellIn, quality);
+  }
   updateQuality() {
     if (this.quality > 0) this.quality -= 2;
     this.decreaseSellIn();
