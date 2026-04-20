@@ -9,27 +9,27 @@ describe("Gilded Rose", () => {
   });
 
   describe("normal items", () => {
-    test("new shop can be created with normal item", () => {
+    test("get correct name when created", () => {
       const shop = new Shop([new NormalItem("foo", 0, 0)]);
       const items = shop.updateQuality();
       expect(items[0].name).to.equal("foo");
     });
 
-    test("normal item with sellIn 0 degrades twice", () => {
+    test("with sellIn 0 degrades twice", () => {
       const shop = new Shop([new NormalItem("foo", 0, 10)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(8);
       expect(items[0].sellIn).to.equal(-1);
     });
 
-    test("normal item with quality 0 stays at 0", () => {
+    test("with quality 0 stays at 0", () => {
       const shop = new Shop([new NormalItem("foo", 0, 0)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(0);
       expect(items[0].sellIn).to.equal(-1);
     });
 
-    test("normal item with sellIn 1 and quality 2 degrades to 0 sellIn and 1 quality", () => {
+    test("with sellIn 1 and quality 2 degrades to 0 sellIn and 1 quality", () => {
       const shop = new Shop([new NormalItem("foo", 1, 2)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(1);
@@ -38,40 +38,40 @@ describe("Gilded Rose", () => {
   });
 
   describe("aged brie", () => {
-    test("new Aged Brie item has name Aged Brie", () => {
+    test("has correct name when created", () => {
       const shop = new Shop([new AgedBrie(10, 10)]);
       expect(shop.items[0].name).to.equal("Aged Brie");
     });
 
-    test("aged brie with sellIn 3 and quality 3 updates to sellIn 2 and quality 4", () => {
+    test("with sellIn 3 and quality 3 updates to sellIn 2 and quality 4", () => {
       const shop = new Shop([new AgedBrie(3, 3)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(4);
       expect(items[0].sellIn).to.equal(2);
     });
 
-    test("aged brie with sellIn 20", () => {
+    test("with sellIn 20", () => {
       const shop = new Shop([new AgedBrie(20, 3)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(4);
       expect(items[0].sellIn).to.equal(19);
     });
 
-    test("aged brie with sellIn 0 increases quality twice", () => {
+    test("with sellIn 0 increases quality twice", () => {
       const shop = new Shop([new AgedBrie(0, 0)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(2);
       expect(items[0].sellIn).to.equal(-1);
     });
 
-    test("aged brie with 50 quality and 0 sellIn stays 50 quality but degrades to -1 sellIn", () => {
+    test("with 50 quality and 0 sellIn stays 50 quality but degrades to -1 sellIn", () => {
       const shop = new Shop([new AgedBrie(0, 50)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(50);
       expect(items[0].sellIn).to.equal(-1);
     });
 
-    test("aged brie with sellIn 1 increases quality by 1", () => {
+    test("with sellIn 1 increases quality by 1", () => {
       const shop = new Shop([new AgedBrie(1, 1)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(2);
