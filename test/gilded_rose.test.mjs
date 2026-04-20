@@ -121,25 +121,13 @@ describe("Gilded Rose", () => {
     });
   });
 
-  test("sulfuras, hand of ragnaros is unchanged", () => {
-    const shop = new Shop([new Sulfuras("Sulfuras, Hand of Ragnaros", 3, 3)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(80);
-    expect(items[0].sellIn).to.equal(3);
-  });
-
-  test("sulfuras, hand of ragnaros is unchanged with 0 sellIn", () => {
-    const shop = new Shop([new Sulfuras("Sulfuras, Hand of Ragnaros", 0, 0)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(80);
-    expect(items[0].sellIn).to.equal(0);
-  });
-
-  test("sulfuras, hand of ragnaros is unchanged with 0 sellIn and positive quality", () => {
-    const shop = new Shop([new Sulfuras("Sulfuras, Hand of Ragnaros", 0, 1)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(80);
-    expect(items[0].sellIn).to.equal(0);
+  describe("Sulfuras, Hand of Ragnaros", () => {
+    test("sellIn is 0 and quality is 80", () => {
+      const shop = new Shop([new Sulfuras()]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(80);
+      expect(items[0].sellIn).to.equal(0);
+    });
   });
 
   test("conjured item with 2 quality should degrade to 0", () => {
