@@ -28,6 +28,13 @@ describe("Gilded Rose", () => {
       expect(items[0].quality).to.equal(0);
       expect(items[0].sellIn).to.equal(-1);
     });
+
+    test("normal item with sellIn 1 and quality 2 degrades to 0 sellIn and 1 quality", () => {
+      const shop = new Shop([new NormalItem("foo", 1, 2)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(1);
+      expect(items[0].sellIn).to.equal(0);
+    });
   });
 
   describe("aged brie", () => {
