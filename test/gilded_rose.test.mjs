@@ -165,5 +165,12 @@ describe("Gilded Rose", () => {
       const items = shop.updateQuality();
       expect(items[0].quality).to.equal(8);
     });
+
+    test("with sellIn 0 and quality 2 should not degrade below 0 after expiry check", () => {
+      const shop = new Shop([new ConjuredItem(0, 2)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(0);
+      expect(items[0].sellIn).to.equal(-1);
+    });
   });
 });
