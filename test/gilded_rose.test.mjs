@@ -8,24 +8,26 @@ describe("Gilded Rose", () => {
     expect(gildedRose.items).to.deep.equal([]);
   });
 
-  test("new shop can be created with item foo", () => {
-    const gildedRose = new Shop([new NormalItem("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).to.equal("foo");
-  });
+  describe("normal items", () => {
+    test("new shop can be created with normal item", () => {
+      const gildedRose = new Shop([new NormalItem("foo", 0, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).to.equal("foo");
+    });
 
-  test("normal item with sellIn 0 degrades twice", () => {
-    const gildedRose = new Shop([new NormalItem("foo", 0, 10)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(8);
-    expect(items[0].sellIn).to.equal(-1);
-  });
+    test("normal item with sellIn 0 degrades twice", () => {
+      const gildedRose = new Shop([new NormalItem("foo", 0, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).to.equal(8);
+      expect(items[0].sellIn).to.equal(-1);
+    });
 
-  test("normal item with quality 0 stays at 0", () => {
-    const gildedRose = new Shop([new NormalItem("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(0);
-    expect(items[0].sellIn).to.equal(-1);
+    test("normal item with quality 0 stays at 0", () => {
+      const gildedRose = new Shop([new NormalItem("foo", 0, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).to.equal(0);
+      expect(items[0].sellIn).to.equal(-1);
+    });
   });
 
   test("backstage passes with sellIn 1 and quality 0 increase quality by 3", () => {
