@@ -80,6 +80,11 @@ describe("Gilded Rose", () => {
   });
 
   describe("backstage passes", () => {
+    test("have correct name when created", () => {
+      const backstagePass = new BackstagePass(10, 10);
+      expect(backstagePass.name).to.equal("Backstage passes to a TAFKAL80ETC concert");
+    });
+
     test("with sellIn 1 and quality 0 increase quality by 3", () => {
       const shop = new Shop([new BackstagePass(1, 0)]);
       const items = shop.updateQuality();
