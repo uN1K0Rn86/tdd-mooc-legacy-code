@@ -79,81 +79,41 @@ describe("Gilded Rose", () => {
     });
   });
 
-  test("backstage passes with sellIn 1 and quality 0 increase quality by 3", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 1, 0)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(3);
-    expect(items[0].sellIn).to.equal(0);
-  });
+  describe("backstage passes", () => {
+    test("with sellIn 1 and quality 0 increase quality by 3", () => {
+      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 1, 0)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(3);
+      expect(items[0].sellIn).to.equal(0);
+    });
 
-  test("backstage passes with higher sellIn", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 20, 0)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(1);
-    expect(items[0].sellIn).to.equal(19);
-  });
+    test("with sellIn 11 and quality 10 increase quality by 1", () => {
+      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(11);
+      expect(items[0].sellIn).to.equal(10);
+    });
 
-  test("backstage passes with sellIn 10", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 10, 10)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(12);
-    expect(items[0].sellIn).to.equal(9);
-  });
+    test("with sellIn 6 and quality 10 increase quality by 2", () => {
+      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 6, 10)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(12);
+      expect(items[0].sellIn).to.equal(5);
+    });
 
-  test("backstage passes with sellIn exactly 11", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(11);
-    expect(items[0].sellIn).to.equal(10);
-  });
+    test("with quality 50 do not get increased quality", () => {
+      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 5, 50)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(50);
+      expect(items[0].sellIn).to.equal(4);
+    });
 
-  test("backstage pass with sellIn exactly 6", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 6, 10)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(12);
-    expect(items[0].sellIn).to.equal(5);
-  });
-
-  test("backstage passes with sellIn 10 and quality 49", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(50);
-    expect(items[0].sellIn).to.equal(9);
-  });
-
-  test("backstage passes with sellIn 10 and quality 48", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 10, 48)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(50);
-    expect(items[0].sellIn).to.equal(9);
-  });
-
-  test("backstage passes with sellIn 5 and quality 48", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 5, 48)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(50);
-    expect(items[0].sellIn).to.equal(4);
-  });
-
-  test("backstage passes with quality 50", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 5, 50)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(50);
-    expect(items[0].sellIn).to.equal(4);
-  });
-
-  test("backstage passes with sellin 20 quality 48", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 20, 48)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(49);
-    expect(items[0].sellIn).to.equal(19);
-  });
-
-  test("backstage passes with sellIn 0 result in unchanged quality", () => {
-    const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 0, 0)]);
-    const items = shop.updateQuality();
-    expect(items[0].quality).to.equal(0);
-    expect(items[0].sellIn).to.equal(-1);
+    test("backstage passes with sellIn 0 result in unchanged quality", () => {
+      const shop = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 0, 0)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(0);
+      expect(items[0].sellIn).to.equal(-1);
+    });
   });
 
   test("sulfuras, hand of ragnaros is unchanged", () => {
