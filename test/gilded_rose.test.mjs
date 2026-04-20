@@ -136,6 +136,10 @@ describe("Gilded Rose", () => {
   });
 
   describe("Conjured Item", () => {
+    test("gets correct name when created", () => {
+      const conjuredItem = new ConjuredItem(0, 0);
+      expect(conjuredItem.name).to.equal("Conjured Item");
+    });
     test("with 2 quality should degrade to 0", () => {
       const shop = new Shop([new ConjuredItem(1, 2)]);
       const items = shop.updateQuality();
