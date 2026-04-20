@@ -140,11 +140,18 @@ describe("Gilded Rose", () => {
       const conjuredItem = new ConjuredItem(0, 0);
       expect(conjuredItem.name).to.equal("Conjured Item");
     });
+
     test("with 2 quality should degrade to 0", () => {
       const shop = new Shop([new ConjuredItem(1, 2)]);
       const items = shop.updateQuality();
       expect(items[0].quality).to.be.equal(0);
       expect(items[0].sellIn).to.be.equal(0);
+    });
+
+    test("with 0 quality should not degrade", () => {
+      const shop = new Shop([new ConjuredItem(1, 0)]);
+      const items = shop.updateQuality();
+      expect(items[0].quality).to.equal(0);
     });
   });
 });
